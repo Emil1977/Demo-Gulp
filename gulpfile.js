@@ -52,10 +52,7 @@ gulp.task('js',done => {
     .pipe(babel({
       presets: ['@babel/env']
     }))
-    /*.pipe(browserify({
-      insertGlobals : true,
-      debug : !gulp.env.production
-    }))*/
+    .pipe(browserify())
     .pipe(uglify())
     .pipe(rename({
       suffix: '.min'
@@ -65,13 +62,21 @@ gulp.task('js',done => {
     done();
 });
 
+/*gulp.task('browserify', done => {
+  return gulp.src(src + 'assets/js/*.js')
+   .pipe(browserify())
+   .pipe(uglify())
+   .pipe(gulp.dest(dist + 'assets/js'))
+   done();
+});*/
 
-/*gulp.task('browserify', function() {
+
+/* gulp.task('browserify', function() {
   return browserify(sourceFile)
   .bundle({debug:true})
   .pipe(source(destFile))
   .pipe(gulp.dest(destFolder));
-});*/
+}); */
 
 // ###########################################################
 // MINIFY HTML
