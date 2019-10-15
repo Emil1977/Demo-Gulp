@@ -1,1 +1,1 @@
-{"version":3,"sources":["main.sass"],"names":[],"mappings":"AAAA,KACE,WAAA","file":"style.min.css","sourcesContent":["body {\n  background: #ff6600; }\n"]}
+{"version":3,"sources":["_var.sass","main.sass"],"names":[],"mappings":"AAAA,IACE,MAAA,KCCF,KACE,WAAA","file":"style.min.css","sourcesContent":["div {\n  color: #00ffff; }\n","@import \"var\";\n\nbody {\n  background: #ff6600; }\n\n"]}
