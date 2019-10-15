@@ -38,6 +38,7 @@ gulp.task('sass', done => {
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(dist + 'assets/css'))
+    .pipe(browserSync.stream())
   done();
 });
 
@@ -59,24 +60,10 @@ gulp.task('js',done => {
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(dist + 'assets/js'))
+    .pipe(browserSync.stream())
     done();
 });
 
-/*gulp.task('browserify', done => {
-  return gulp.src(src + 'assets/js/*.js')
-   .pipe(browserify())
-   .pipe(uglify())
-   .pipe(gulp.dest(dist + 'assets/js'))
-   done();
-});*/
-
-
-/* gulp.task('browserify', function() {
-  return browserify(sourceFile)
-  .bundle({debug:true})
-  .pipe(source(destFile))
-  .pipe(gulp.dest(destFolder));
-}); */
 
 // ###########################################################
 // MINIFY HTML
@@ -91,6 +78,7 @@ gulp.task('html', done => {
       collapseWhitespace: true
     }))
     .pipe(gulp.dest(dist))
+    .pipe(browserSync.stream())
   done();
 });
 
@@ -99,6 +87,11 @@ gulp.task('html', done => {
 // WATCH
 
 gulp.task('default', function() {
+
+  browserSync.init({
+    server: './dist'
+  });
+
   gulp.watch([src + '*.html', src + 'assets/sass/*.sass', src + 'assets/js/*.js'],
     gulp.parallel('html', 'sass', 'js'));
 });

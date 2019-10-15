@@ -1,1 +1,1 @@
-{"version":3,"sources":["_var.sass","main.sass"],"names":[],"mappings":"AAAA,IACE,MAAA,KCCF,KACE,WAAA","file":"style.min.css","sourcesContent":["div {\n  color: #00ffff; }\n","@import \"var\";\n\nbody {\n  background: #ff6600; }\n\n"]}
+{"version":3,"sources":["_var.sass","main.sass"],"names":[],"mappings":"AAAA,IACE,MAAA,KACA,YAAA,IACA,WAAA,ICDF,KACE,WAAA","file":"style.min.css","sourcesContent":["div {\n  color: #00ffff;\n  margin-left: 50%;\n  margin-top: 20%; }\n","@import \"var\";\n\nbody {\n  background: #ff6699; }\n"]}

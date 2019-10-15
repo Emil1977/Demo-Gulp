@@ -1,3 +1,4 @@
 import $ from 'jquery';
+import howler from 'howler';
 
-console.log($('body'));
+console.log('Es geht!!!');
