@@ -19,34 +19,42 @@ var gulp          = require('gulp'),
 
 var src        ='./src/',
     dist       ='./dist/';
+
+
+    // ###########################################################
+    // MINIFY SASS
+
+    gulp.task('sass', done => {
+      gulp.src(src + 'assets/sass/*.sass')
+        .pipe(sourcemaps.init())
+          .pipe(plumber())
+          .pipe(sass())
+          .pipe(autoprefixer())
+          .pipe(rename({ basename: 'style'}))
+          .pipe(cleanCSS())
+          .pipe(rename({ suffix: '.min'}))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(dist + 'assets/css'))
+        done();
+    });
+
+
 // ###########################################################
 // MINIFY HTML
 
 gulp.task('html', done => {
   gulp.src(dist + '*.html',{force: true})
-    .pipe(clean())
+    .pipe(clean());
   gulp.src(src + '*.html')
-    .pipe(htmlmin({collapseWitespace: true}))
+    .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(dist))
     done();
 });
 
-// ###########################################################
-// MINIFY SASS
 
-gulp.task('sass', done => {
-  gulp.src(src + 'assets/sass/*.sass')
-    .pipe(sourcemaps.init())
-      .pipe(plumber())
-      .pipe(sass())
-      .pipe(autoprefixer())
-      .pipe(rename({ basename: 'style'}))
-      .pipe(cleanCSS())
-      .pipe(rename({ suffix: '.min'}))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(dist + 'assets/css'))
-    done();
-});
+
+// ###########################################################
+// MINIFY js
 
 gulp.task('js', done => {
   gulp.src('./app/js/*.js')
@@ -61,9 +69,17 @@ gulp.task('js', done => {
 // ###########################################################
 // WATCH
 
+/*gulp.task('default', () => {
+  gulp.watch(['./app/sass/*.sass','./app/js/*.js'],
+  gulp.parallel('sass','js','html'));
+});*/
+
+
 gulp.task('default', () => {
-  gulp.watch([src + '*.html'],['html']);
-  gulp.watch([src + 'assets/sass/*.sass'],['sass']);
+  gulp.watch([src + '*.html']);
+  gulp.watch([src + 'assets/sass/*.sass']);
+  gulp.series('sass','html');
+
   //,'./app/js/*.js'],
   //gulp.parallel('html','sass','js'));
 });
